@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo | Dietética Estación 927</title>
+    <meta name="description"
+        content="Catálogo de productos de Dietética Estación 927. Armá tu pedido y envialo por WhatsApp.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/img/logo-estacion-927.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <header id="header">
+        <div class="container nav-container">
+            <a href="index.html#inicio" class="logo">
+                <img src="assets/img/logo-estacion-927.png" alt="Estación 927">
+            </a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Abrir menú de navegación">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li><a href="index.html#nosotros">Nosotros</a></li>
+                <li><a href="index.html#pilares">Filosofía</a></li>
+                <li><a href="index.html#galeria">Local</a></li>
+                <li><a href="catalogo.html">Catálogo</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+            <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container reveal">
+                <h1>Catálogo saludable</h1>
+                <p>Elegí tus productos, armá el carrito de pedido y mandanos el detalle por WhatsApp. Simple, claro y
+                    sin vueltas.</p>
+            </div>
+        </section>
+
+        <section class="catalog-section section-padding" aria-labelledby="catalogTitle">
+            <div class="container">
+                <div class="section-header text-center reveal">
+                    <h2 id="catalogTitle">Productos seleccionados</h2>
+                    <!--                    <p>Por ahora la lista es estática, pero quedó preparada para reemplazar estos datos por una API más adelante sin romper la estructura visual.</p> -->
+                </div>
+
+                <div class="catalog-layout">
+                    <div class="catalog-toolbar reveal" aria-label="Filtros del catálogo">
+                        <div class="catalog-field catalog-field--category">
+                            <label for="categoryFilter">Filtrar por categoría</label>
+                            <select id="categoryFilter" class="category-filter">
+                                <option value="Todos">Todos los productos</option>
+                            </select>
+                        </div>
+                        <div class="catalog-field catalog-field--search">
+                            <label for="productSearch">Buscar producto</label>
+                            <div class="product-search-wrapper">
+                                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                                <input id="productSearch" class="product-search" type="search"
+                                    placeholder="Buscar por nombre, categoría o beneficio">
+                            </div>
+                        </div>
+                        <div class="catalog-field catalog-field--diet">
+                            <label>Preferencias</label>
+                            <div class="diet-filters" id="dietFilters">
+                                <button type="button" class="diet-filter-btn active" data-diet="todos">Todos</button>
+                                <button type="button" class="diet-filter-btn" data-diet="sinTacc">Sin TACC</button>
+                                <button type="button" class="diet-filter-btn" data-diet="vegano">Vegano</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="products-grid-container">
+                        <div class="products-grid" id="productsGrid" aria-live="polite"></div>
+                        <div id="catalogLoader" class="catalog-loader hidden">
+                            <div class="skeleton-card"></div>
+                            <div class="skeleton-card"></div>
+                            <div class="skeleton-card"></div>
+                        </div>
+                        <div id="scrollSentinel"></div>
+                    </div>
+
+                    <aside class="cart-panel reveal" aria-labelledby="cartTitle">
+                        <h2 id="cartTitle">Tu pedido (<span id="cartCount">0</span>)</h2>
+                        <p class="cart-empty" id="cartEmpty">Todavía no agregaste productos. Elegí algo de la grilla y
+                            armamos el mensaje automáticamente.</p>
+                        <ul class="cart-items" id="cartItems"></ul>
+                        <div class="cart-actions">
+                            <a class="btn btn-whatsapp" id="orderButton" href="#" target="_blank" rel="noopener"
+                                aria-disabled="true">
+                                <i class="fa-brands fa-whatsapp"></i> Hacer pedido
+                            </a>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <img src="assets/img/logo-estacion-927.png" alt="Estación 927 Logo">
+            </div>
+            <div class="social-links">
+                <a href="https://instagram.com/dieteticaEstación 927" target="_blank" aria-label="Instagram"><i
+                        class="fa-brands fa-instagram"></i></a>
+                <a href="https://api.whatsapp.com/send?phone=549341000000" target="_blank" aria-label="WhatsApp"><i
+                        class="fa-brands fa-whatsapp"></i></a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Dietética Estación 927. Todos los derechos reservados.</p>
+                <p class="developer-credit">Diseñado y desarrollado por <a href="https://sebastianperez.com.ar" target="_blank" rel="noopener">Sebastian Perez</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="product-modal" id="productModal" aria-hidden="true">
+        <div class="product-modal__backdrop" data-modal-close></div>
+        <section class="product-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modalProductTitle">
+            <button class="product-modal__close" type="button" data-modal-close aria-label="Cerrar detalle de producto">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="product-modal__body" id="productModalBody"></div>
+        </section>
+    </div>
+
+    <script src="assets/js/config.js?v=2" defer></script>
+    <script src="assets/js/animations.js" defer></script>
+    <script src="assets/js/catalog.js" defer></script>
+</body>
+
+</html>
