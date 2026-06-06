@@ -1,9 +1,9 @@
 # Estación 927 - Tienda Saludable 🌿
 
-¡Buenas! Bienvenidos al repositorio de **Estación 927**, un trabajo personal profesional de diseño y desarrollo web para la dietética y tienda saludable homónima ubicada en la ciudad de **Rosario, Santa Fe, Argentina**.
+¡Buenas! Bienvenidos al repositorio de **Estación 927**, un trabajo profesional de diseño y desarrollo web para la dietética y tienda saludable homónima ubicada en la ciudad de **Rosario, Santa Fe, Argentina**.
 
 > [!TIP]
-> Podés ver el resultado final en producción ingresando a [estacion927.com.ar](https://estacion927.com.ar).
+> Podés ver el resultado final en producción ingresando a <a href="https://estacion927.com.ar" target="_blank">estacion927.com.ar</a>.
 
 Este proyecto fue concebido y desarrollado desde cero con un enfoque de alto nivel, buscando fusionar una estética visual limpia y premium con una experiencia de usuario interactiva y fluida para todos los clientes que buscan una alimentación consciente y saludable. Todo el diseño y la maquetación fueron pensados y estructurados bajo una filosofía **Mobile First**, priorizando una experiencia óptima y responsiva en dispositivos móviles.
 
@@ -81,4 +81,4 @@ Si querés probar la aplicación de manera local o conectarla con tu propio back
 - **Fuentes:** Google Fonts (Montserrat y Playfair Display).
 - **Control de Versiones:** Git & GitHub.
 
-Diseñado y desarrollado profesionalmente por [Sebastian Perez](https://sebastianperez.com.ar).
+Diseñado y desarrollado profesionalmente por <a href="https://sebastianperez.com.ar" target="_blank">Sebastian Perez</a>.
