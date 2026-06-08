@@ -247,7 +247,7 @@ body.nav-open {
         .hero-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 120%; /* for parallax */
-            background-image: url('../img/hero-bg.png');
+            background-image: url('../img/hero-bg.png?v=5');
             background-size: cover;
             background-position: center;
             z-index: 0;

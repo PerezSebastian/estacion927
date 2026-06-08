@@ -12,13 +12,12 @@ if (typeof CONFIG === 'undefined') {
 }
 
 let catalogProducts = [];
-
 const LOCAL_PRODUCTS_FALLBACK = [
     {
         id: 0,
         title: 'Yerba mate orgánica APIDELTA 500g',
         category: 'Infusiones',
-        image: 'assets/img/yerba-apidelta.png',
+        image: 'assets/img/yerba-apidelta.png?v=5',
         sinTacc: true,
         vegano: true,
         description: 'Es una yerba mate de tipo tradicional, presentada en envase de papel. Se destaca por un proceso de estacionamiento natural de 18 meses, lo que garantiza una maduración óptima. En la foto, cuenta con un indicador de ser una variante antiácida.',
@@ -32,7 +31,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 1,
         title: 'Aceite de oliva TU ACEITE 250ml',
         category: 'Aceites',
-        image: 'assets/img/gallery-detail.png',
+        image: 'assets/img/gallery-detail.png?v=5',
         sinTacc: true,
         vegano: true,
         description: 'Aceite de oliva de uso cotidiano, ideal para condimentar ensaladas, vegetales grillados y preparaciones simples donde se busca un perfil natural y equilibrado.',
@@ -46,7 +45,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 2,
         title: 'Aceite de coco TU ACEITE 250ml',
         category: 'Aceites',
-        image: 'assets/img/gallery-detail.png',
+        image: 'assets/img/gallery-detail.png?v=5',
         sinTacc: true,
         vegano: true,
         description: 'Aceite de coco versátil, pensado para recetas dulces, salteados suaves y preparaciones naturales que buscan una textura cremosa y un aroma delicado.',
@@ -60,7 +59,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 3,
         title: 'Cereal sin azúcar COPITOS 350g',
         category: 'Cereales',
-        image: 'assets/img/gallery-shelves.png',
+        image: 'assets/img/gallery-shelves.png?v=5',
         sinTacc: false,
         vegano: true,
         description: 'Cereal crocante sin azúcar agregada, pensado para desayunos livianos, yogures, bowls con fruta o meriendas rápidas sin exceso de dulzor.',
@@ -74,7 +73,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 4,
         title: 'Granola artesanal con frutos secos 500g',
         category: 'Cereales',
-        image: 'assets/img/gallery-shelves.png',
+        image: 'assets/img/gallery-shelves.png?v=5',
         sinTacc: false,
         vegano: true,
         description: 'Granola artesanal con mezcla de cereales y frutos secos, ideal para sumar textura, energía y sabor a desayunos o colaciones.',
@@ -88,7 +87,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 5,
         title: 'Almendras naturales premium 250g',
         category: 'Frutos secos',
-        image: 'assets/img/gallery-detail.png',
+        image: 'assets/img/gallery-detail.png?v=5',
         sinTacc: true,
         vegano: true,
         description: 'Almendras naturales seleccionadas, sin cobertura ni saborizantes, pensadas para consumir solas, activar, usar en recetas o sumar a ensaladas.',
@@ -102,7 +101,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 6,
         title: 'Nueces mariposa seleccionadas 250g',
         category: 'Frutos secos',
-        image: 'assets/img/gallery-detail.png',
+        image: 'assets/img/gallery-detail.png?v=5',
         sinTacc: true,
         vegano: true,
         description: 'Nueces mariposa seleccionadas, con sabor intenso y textura tierna, ideales para preparaciones dulces, ensaladas o consumo directo.',
@@ -116,7 +115,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 7,
         title: 'Mix energético con pasas y maní 400g',
         category: 'Snacks',
-        image: 'assets/img/gallery-shelves.png',
+        image: 'assets/img/gallery-shelves.png?v=5',
         sinTacc: true,
         vegano: true,
         description: 'Mix práctico de frutos secos y frutas deshidratadas, pensado para colaciones, caminatas, jornadas largas o momentos de mucha actividad.',
@@ -130,7 +129,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 8,
         title: 'Harina integral orgánica 1kg',
         category: 'Harinas',
-        image: 'assets/img/about-interior.png',
+        image: 'assets/img/about-interior.png?v=5',
         sinTacc: false,
         vegano: true,
         description: 'Harina integral orgánica para panes, masas, budines y recetas caseras con mayor presencia de fibra y sabor cereal.',
@@ -144,7 +143,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 9,
         title: 'Harina de arroz sin TACC 500g',
         category: 'Sin TACC',
-        image: 'assets/img/about-interior.png',
+        image: 'assets/img/about-interior.png?v=5',
         sinTacc: true,
         vegano: true,
         description: 'Harina de arroz sin TACC, liviana y suave, pensada para preparaciones aptas para celíacos y recetas libres de gluten.',
@@ -158,7 +157,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 10,
         title: 'Galletas de avena y miel 300g',
         category: 'Galletas',
-        image: 'assets/img/gallery-shelves.png',
+        image: 'assets/img/gallery-shelves.png?v=5',
         sinTacc: false,
         vegano: false,
         description: 'Galletas con avena y miel, de perfil casero y simple, ideales para acompañar infusiones o resolver una merienda rápida.',
@@ -172,7 +171,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 11,
         title: 'Yerba mate orgánica suave 500g',
         category: 'Infusiones',
-        image: 'assets/img/gallery-detail.png',
+        image: 'assets/img/gallery-detail.png?v=5',
         sinTacc: true,
         vegano: true,
         description: 'Yerba mate orgánica de perfil suave, elaborada para quienes buscan una infusión tradicional menos invasiva y de sabor equilibrado.',
@@ -186,7 +185,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 12,
         title: 'Té verde en hebras premium 100g',
         category: 'Infusiones',
-        image: 'assets/img/gallery-detail.png',
+        image: 'assets/img/gallery-detail.png?v=5',
         sinTacc: true,
         vegano: true,
         description: 'Té verde en hebras de selección premium, ideal para preparar infusiones livianas, aromáticas y con sabor vegetal delicado.',
@@ -200,7 +199,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 13,
         title: 'Miel pura de campo 500g',
         category: 'Endulzantes',
-        image: 'assets/img/gallery-detail.png',
+        image: 'assets/img/gallery-detail.png?v=5',
         sinTacc: true,
         vegano: false,
         description: 'Miel pura de campo, de sabor natural y textura amable, pensada para endulzar infusiones, tostadas, yogures o preparaciones caseras.',
@@ -214,7 +213,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 14,
         title: 'Azúcar mascabo integral 500g',
         category: 'Endulzantes',
-        image: 'assets/img/about-interior.png',
+        image: 'assets/img/about-interior.png?v=5',
         sinTacc: true,
         vegano: true,
         description: 'Azúcar mascabo integral con notas acarameladas, ideal para reemplazar azúcar blanca en recetas donde se busca más sabor y rusticidad.',
@@ -228,7 +227,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 15,
         title: 'Semillas de chía 250g',
         category: 'Semillas',
-        image: 'assets/img/gallery-shelves.png',
+        image: 'assets/img/gallery-shelves.png?v=5',
         sinTacc: true,
         vegano: true,
         description: 'Semillas de chía pequeñas y versátiles, ideales para puddings, yogures, licuados o para sumar textura y fibra a preparaciones diarias.',
@@ -242,7 +241,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 16,
         title: 'Semillas de lino dorado 250g',
         category: 'Semillas',
-        image: 'assets/img/gallery-shelves.png',
+        image: 'assets/img/gallery-shelves.png?v=5',
         sinTacc: true,
         vegano: true,
         description: 'Semillas de lino dorado para sumar a desayunos, panes, crackers o preparaciones donde se busca fibra y textura natural.',
@@ -256,7 +255,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 17,
         title: 'Quinoa blanca seleccionada 500g',
         category: 'Legumbres',
-        image: 'assets/img/about-interior.png',
+        image: 'assets/img/about-interior.png?v=5',
         sinTacc: true,
         vegano: true,
         description: 'Quinoa blanca seleccionada, grano liviano y versátil para bowls, ensaladas tibias, guarniciones o preparaciones completas.',
@@ -270,7 +269,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 18,
         title: 'Lentejas turcas peladas 500g',
         category: 'Legumbres',
-        image: 'assets/img/about-interior.png',
+        image: 'assets/img/about-interior.png?v=5',
         sinTacc: true,
         vegano: true,
         description: 'Lentejas turcas peladas, de cocción rápida y textura suave, ideales para sopas, guisos livianos, purés o hamburguesas vegetales.',
@@ -284,7 +283,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 19,
         title: 'Barrita proteica cacao y maní 50g',
         category: 'Snacks',
-        image: 'assets/img/gallery-detail.png',
+        image: 'assets/img/gallery-detail.png?v=5',
         sinTacc: false,
         vegano: false,
         description: 'Barrita proteica con cacao y maní, pensada como snack práctico para después de entrenar, viajes cortos o momentos de hambre entre comidas.',
@@ -298,7 +297,7 @@ const LOCAL_PRODUCTS_FALLBACK = [
         id: 20,
         title: 'Leche de almendras sin azúcar 1L',
         category: 'Bebidas',
-        image: 'assets/img/gallery-shelves.png',
+        image: 'assets/img/gallery-shelves.png?v=5',
         sinTacc: true,
         vegano: true,
         description: 'Bebida vegetal de almendras sin azúcar agregada, ideal para desayunos, licuados, café o recetas donde se busca una opción más liviana.',
@@ -354,11 +353,11 @@ const renderProductFlags = product => {
     const flags = [];
 
     if (product.sinTacc) {
-        flags.push('<img class="product-flag-icon" src="assets/img/utils/sin-gluten.png" alt="Sin TACC" title="Sin TACC" loading="lazy">');
+        flags.push('<img class="product-flag-icon" src="assets/img/utils/sin-gluten.png?v=5" alt="Sin TACC" title="Sin TACC" loading="lazy">');
     }
 
     if (product.vegano) {
-        flags.push('<img class="product-flag-icon" src="assets/img/utils/vegano.png" alt="Vegano" title="Vegano" loading="lazy">');
+        flags.push('<img class="product-flag-icon" src="assets/img/utils/vegano.png?v=5" alt="Vegano" title="Vegano" loading="lazy">');
     }
 
     return flags.length ? `<div class="product-flags">${flags.join('')}</div>` : '';
@@ -738,17 +737,17 @@ const enrichProduct = (apiProduct) => {
     } else {
         const categoryLower = category.toLowerCase();
         if (categoryLower.includes('aceite')) {
-            rawImage = 'assets/img/gallery-detail.png';
+            rawImage = 'assets/img/gallery-detail.png?v=5';
         } else if (categoryLower.includes('cereal') || categoryLower.includes('granola')) {
-            rawImage = 'assets/img/gallery-shelves.png';
+            rawImage = 'assets/img/gallery-shelves.png?v=5';
         } else if (categoryLower.includes('fruto') || categoryLower.includes('nuez') || categoryLower.includes('almendra')) {
-            rawImage = 'assets/img/gallery-detail.png';
+            rawImage = 'assets/img/gallery-detail.png?v=5';
         } else if (categoryLower.includes('infusión') || categoryLower.includes('yerba') || nameLower.includes('té ') || nameLower.includes('mate')) {
-            rawImage = 'assets/img/yerba-apidelta.png';
+            rawImage = 'assets/img/yerba-apidelta.png?v=5';
         } else if (categoryLower.includes('harina') || categoryLower.includes('legumbre') || categoryLower.includes('semilla')) {
-            rawImage = 'assets/img/about-interior.png';
+            rawImage = 'assets/img/about-interior.png?v=5';
         } else {
-            rawImage = 'assets/img/gallery-detail.png';
+            rawImage = 'assets/img/gallery-detail.png?v=5';
         }
     }
 
