@@ -436,24 +436,30 @@ const openProductModal = productId => {
 
     productModalBody.innerHTML = `
         <div class="product-modal__media">
-            <img src="${product.image}" alt="${product.title}">
+            <img src="${product.image}" alt="${product.title}" class="product-modal__image">
         </div>
         <div class="product-modal__content">
-            <div class="product-meta">
-                <span class="product-badge">${product.category}</span>
-                ${renderProductFlags(product)}
+            <div>
+                <div class="product-meta">
+                    <span class="product-badge">${product.category}</span>
+                    ${renderProductFlags(product)}
+                </div>
+                <h2 id="modalProductTitle">${product.title}</h2>
             </div>
-            <h2 id="modalProductTitle">${product.title}</h2>
-            <div class="product-detail-block">
-                <h3>Descripción</h3>
-                <p>${product.description}</p>
+            
+            <div class="product-modal__details-wrapper">
+                <div class="product-detail-block">
+                    <h3>Descripción</h3>
+                    <p>${product.description}</p>
+                </div>
+                <div class="product-detail-block">
+                    <h3>Beneficios y propiedades</h3>
+                    <ul>
+                        ${product.benefits.map(benefit => `<li>${benefit}</li>`).join('')}
+                    </ul>
+                </div>
             </div>
-            <div class="product-detail-block">
-                <h3>Beneficios y propiedades</h3>
-                <ul>
-                    ${product.benefits.map(benefit => `<li>${benefit}</li>`).join('')}
-                </ul>
-            </div>
+            
             <button class="btn btn-primary" type="button" data-modal-add-to-cart="${product.id}">
                 Agregar al carrito
             </button>
@@ -525,7 +531,7 @@ const renderProducts = (appendOnly = false, newProducts = []) => {
 
     const cardsHtml = productsToRender.map(product => `
         <article class="product-card" data-card-product-id="${product.id}" tabindex="0" role="button" aria-label="Ver detalle de ${product.title}">
-            <img class="product-image" src="${product.image}" alt="${product.title}" loading="lazy">
+            <img class="product-image" src="${product.imageCard}" alt="${product.title}" loading="lazy">
             <div class="product-content">
                 <div class="product-meta">
                     <span class="product-badge">${product.category}</span>
@@ -578,56 +584,139 @@ const renderProducts = (appendOnly = false, newProducts = []) => {
     }
 };
 
+const optimizeCloudinaryUrl = (url, width, height, crop = 'limit') => {
+    if (!url || typeof url !== 'string') return url;
+    if (!url.includes('res.cloudinary.com') && !url.includes('/image/upload/')) return url;
+
+    try {
+        const parts = url.split('/image/upload/');
+        if (parts.length !== 2) return url;
+
+        const prefix = parts[0] + '/image/upload';
+        const rest = parts[1];
+        
+        const gravity = (crop === 'fill' || crop === 'crop') ? ',g_auto' : '';
+        const transformation = `c_${crop}${gravity},w_${width},h_${height},f_auto,q_auto`;
+
+        const segments = rest.split('/');
+        const firstSegment = segments[0];
+
+        const isTransformation = firstSegment.includes(',') || 
+                                 /^(c_|w_|h_|q_|f_|r_|e_|dpr_|bo_)/.test(firstSegment);
+
+        if (isTransformation) {
+            segments[0] = transformation;
+            return `${prefix}/${segments.join('/')}`;
+        } else {
+            return `${prefix}/${transformation}/${rest}`;
+        }
+    } catch (e) {
+        console.error('Error al optimizar URL de Cloudinary:', e);
+        return url;
+    }
+};
+
 const enrichProduct = (apiProduct) => {
+    const attrs = apiProduct.attributes || [];
+    
+    const getAttrValue = (name) => {
+        const attr = attrs.find(a => a.name.trim().toLowerCase() === name.toLowerCase());
+        return attr ? attr.value : undefined;
+    };
+
     const match = LOCAL_PRODUCTS_FALLBACK.find(local => 
         local.title.trim().toLowerCase() === apiProduct.name.trim().toLowerCase()
     );
 
-    if (match) {
-        return {
-            ...match,
-            id: apiProduct.id,
-            title: apiProduct.name,
-            category: apiProduct.category || match.category
-        };
+    const apiSinTacc = getAttrValue('sinTACC');
+    const apiVegano = getAttrValue('Vegano');
+    const apiDescription = getAttrValue('Descripción');
+    const apiBenefits = getAttrValue('Beneficios y propiedades');
+    const apiFoto = getAttrValue('Foto');
+
+    const title = apiProduct.name;
+    const category = apiProduct.category || (match ? match.category : 'Otros');
+    const nameLower = title.toLowerCase();
+
+    let sinTacc;
+    if (typeof apiSinTacc === 'boolean') {
+        sinTacc = apiSinTacc;
+    } else if (match && typeof match.sinTacc === 'boolean') {
+        sinTacc = match.sinTacc;
+    } else {
+        const sinTaccKeywords = ['sin tacc', 'sin gluten', 'libre de gluten', 'apto celíacos', 'arroz', 'chía', 'lino', 'quinoa', 'lenteja', 'aceite'];
+        sinTacc = sinTaccKeywords.some(keyword => nameLower.includes(keyword)) && 
+                  !nameLower.includes('avena') && !nameLower.includes('trigo') && !nameLower.includes('centeno');
     }
 
-    const nameLower = apiProduct.name.toLowerCase();
-    const category = apiProduct.category || 'Otros';
-    const categoryLower = category.toLowerCase();
-
-    let image = 'assets/img/gallery-detail.png';
-    if (categoryLower.includes('aceite')) {
-        image = 'assets/img/gallery-detail.png';
-    } else if (categoryLower.includes('cereal') || categoryLower.includes('granola')) {
-        image = 'assets/img/gallery-shelves.png';
-    } else if (categoryLower.includes('fruto') || categoryLower.includes('nuez') || categoryLower.includes('almendra')) {
-        image = 'assets/img/gallery-detail.png';
-    } else if (categoryLower.includes('infusión') || categoryLower.includes('yerba') || nameLower.includes('té ') || nameLower.includes('mate')) {
-        image = 'assets/img/yerba-apidelta.png';
-    } else if (categoryLower.includes('harina') || categoryLower.includes('legumbre') || categoryLower.includes('semilla')) {
-        image = 'assets/img/about-interior.png';
+    let vegano;
+    if (typeof apiVegano === 'boolean') {
+        vegano = apiVegano;
+    } else if (match && typeof match.vegano === 'boolean') {
+        vegano = match.vegano;
+    } else {
+        const veganKeywords = ['vegano', 'vegan', 'almendra', 'coco', 'arroz', 'chía', 'lino', 'quinoa', 'lenteja', 'aceite', 'cereal', 'granola'];
+        vegano = veganKeywords.some(keyword => nameLower.includes(keyword)) && 
+                 !nameLower.includes('miel') && !nameLower.includes('leche vacuna') && !nameLower.includes('huevo');
     }
 
-    const sinTaccKeywords = ['sin tacc', 'sin gluten', 'libre de gluten', 'apto celíacos', 'arroz', 'chía', 'lino', 'quinoa', 'lenteja', 'aceite'];
-    const veganKeywords = ['vegano', 'vegan', 'almendra', 'coco', 'arroz', 'chía', 'lino', 'quinoa', 'lenteja', 'aceite', 'cereal', 'granola'];
-    
-    const sinTacc = sinTaccKeywords.some(keyword => nameLower.includes(keyword)) && !nameLower.includes('avena') && !nameLower.includes('trigo') && !nameLower.includes('centeno');
-    const vegano = veganKeywords.some(keyword => nameLower.includes(keyword)) && !nameLower.includes('miel') && !nameLower.includes('leche vacuna') && !nameLower.includes('huevo');
+    let description;
+    if (apiDescription && typeof apiDescription === 'string' && apiDescription.trim() !== '') {
+        description = apiDescription.trim();
+    } else if (match && match.description) {
+        description = match.description;
+    } else {
+        description = 'Producto de alta calidad seleccionado especialmente para nuestra propuesta saludable Estación 927.';
+    }
 
-    return {
-        id: apiProduct.id,
-        title: apiProduct.name,
-        category: category,
-        image: image,
-        sinTacc: sinTacc,
-        vegano: vegano,
-        description: 'Producto de alta calidad seleccionado especialmente para nuestra propuesta saludable Estación 927.',
-        benefits: [
+    let benefits;
+    if (Array.isArray(apiBenefits) && apiBenefits.length > 0) {
+        benefits = apiBenefits.map(b => b.trim());
+    } else if (match && Array.isArray(match.benefits) && match.benefits.length > 0) {
+        benefits = match.benefits;
+    } else {
+        benefits = [
             'Seleccionado bajo estrictos estándares de pureza y calidad.',
             'Excelente opción para integrar en tus preparaciones diarias.',
             'Aporta nutrientes naturales para complementar un estilo de vida consciente.'
-        ]
+        ];
+    }
+
+    let rawImage = '';
+    if (apiFoto && typeof apiFoto === 'string' && apiFoto.trim() !== '') {
+        rawImage = apiFoto.trim();
+    } else if (match && match.image) {
+        rawImage = match.image;
+    } else {
+        const categoryLower = category.toLowerCase();
+        if (categoryLower.includes('aceite')) {
+            rawImage = 'assets/img/gallery-detail.png';
+        } else if (categoryLower.includes('cereal') || categoryLower.includes('granola')) {
+            rawImage = 'assets/img/gallery-shelves.png';
+        } else if (categoryLower.includes('fruto') || categoryLower.includes('nuez') || categoryLower.includes('almendra')) {
+            rawImage = 'assets/img/gallery-detail.png';
+        } else if (categoryLower.includes('infusión') || categoryLower.includes('yerba') || nameLower.includes('té ') || nameLower.includes('mate')) {
+            rawImage = 'assets/img/yerba-apidelta.png';
+        } else if (categoryLower.includes('harina') || categoryLower.includes('legumbre') || categoryLower.includes('semilla')) {
+            rawImage = 'assets/img/about-interior.png';
+        } else {
+            rawImage = 'assets/img/gallery-detail.png';
+        }
+    }
+
+    const imageCard = optimizeCloudinaryUrl(rawImage, 400, 400, 'limit');
+    const imageModal = optimizeCloudinaryUrl(rawImage, 1000, 1000, 'limit');
+
+    return {
+        id: apiProduct.id,
+        title: title,
+        category: category,
+        image: imageModal,
+        imageCard: imageCard,
+        sinTacc: sinTacc,
+        vegano: vegano,
+        description: description,
+        benefits: benefits
     };
 };
 
