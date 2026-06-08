@@ -1,6 +1,16 @@
 // Catálogo y carrito de pedido
 const WHATSAPP_PHONE = '5493412156308';
 
+// Fallback de CONFIG si config.js no está cargado
+if (typeof CONFIG === 'undefined') {
+    window.CONFIG = {
+        API_URL: '',
+        BUSINESS_ID: '',
+        API_KEY: '',
+        PUBLIC_ONLY: false
+    };
+}
+
 let catalogProducts = [];
 
 const LOCAL_PRODUCTS_FALLBACK = [
@@ -557,7 +567,7 @@ const renderProducts = (appendOnly = false, newProducts = []) => {
 
     const cardsHtml = productsToRender.map(product => `
         <article class="product-card" data-card-product-id="${product.id}" tabindex="0" role="button" aria-label="Ver detalle de ${product.title}">
-            <img class="product-image" src="${product.imageCard}" alt="${product.title}" loading="lazy">
+            <img class="product-image" src="${product.imageCard || product.image}" alt="${product.title}" loading="lazy">
             <div class="product-content">
                 <div class="product-meta">
                     <span class="product-badge">${product.category}</span>
