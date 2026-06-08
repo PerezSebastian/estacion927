@@ -376,8 +376,27 @@ const renderCart = () => {
     if (!cartItems || !cartEmpty || !cartCount) return;
 
     cartItems.innerHTML = '';
-    cartCount.textContent = getCartTotal();
+    const totalItems = getCartTotal();
+    cartCount.textContent = totalItems;
     cartEmpty.style.display = cart.size === 0 ? 'block' : 'none';
+
+    // Actualización de carrito móvil
+    const mobileCartLink = document.getElementById('mobileCartLink');
+    const mobileCartCount = document.getElementById('mobileCartCount');
+
+    if (mobileCartCount) {
+        if (totalItems === 0) {
+            mobileCartCount.textContent = '';
+        } else {
+            mobileCartCount.textContent = `(${totalItems})`;
+        }
+    }
+
+    if (mobileCartLink && totalItems > 0) {
+        mobileCartLink.classList.remove('cart-bump');
+        void mobileCartLink.offsetWidth; // Forzar reflow
+        mobileCartLink.classList.add('cart-bump');
+    }
 
     cart.forEach(({ product, quantity }) => {
         const item = document.createElement('li');
@@ -474,7 +493,14 @@ const openProductModal = productId => {
     const addButton = productModalBody.querySelector('[data-modal-add-to-cart]');
     addButton?.addEventListener('click', () => {
         addToCart(product.id);
-        closeProductModal();
+        
+        addButton.classList.add('added');
+        addButton.innerHTML = '<i class="fa-solid fa-check"></i> Agregado';
+        addButton.disabled = true;
+        
+        setTimeout(() => {
+            closeProductModal();
+        }, 800);
     });
 };
 
@@ -578,7 +604,19 @@ const renderProducts = (appendOnly = false, newProducts = []) => {
         productsGrid.querySelectorAll(buttonsSelector).forEach(button => {
             button.addEventListener('click', event => {
                 event.stopPropagation();
-                addToCart(button.dataset.productId);
+                const productId = button.dataset.productId;
+                addToCart(productId);
+                
+                const originalText = button.innerHTML;
+                button.classList.add('added');
+                button.innerHTML = '<i class="fa-solid fa-check"></i> Agregado';
+                button.disabled = true;
+                
+                setTimeout(() => {
+                    button.classList.remove('added');
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                }, 1200);
             });
         });
     }
